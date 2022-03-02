@@ -3,10 +3,19 @@ import sys
 
 ACCESS_TOKEN = 'efdoQZPNfD67-vtu0L77LV6XYjVg4OepeLPxsun2Y8Ferpxvq-be7a8osNEpkvxZ'
 
-def main():
+def fetch_coverart(artist = None, songName = None):
     genius = Genius(ACCESS_TOKEN)
     genius.remove_section_headers = True
     genius.excluded_terms = ["(Remix)", "(Live)"]
+    if songName != None and artist == None:
+        song = genius.search_song(songName)
+    elif songName != None and artist != None:
+        song = genius.search_song(songName, artist)
+    song_dict = genius.song(song.id)
+    print("song_img: " + song_dict['song']['header_image_url'] + ", album_img: "  + song_dict['song']['song_art_image_url'] + ", song_description: " + song_dict['song']['description']['plain'])
+
+
+def main():
     args = sys.argv[1:]
     artist = None
     songName = None
@@ -21,15 +30,10 @@ def main():
             i += 1
             continue
         i += 2
-    if songName != None and artist == None:
-        song = genius.search_song(songName)
-    elif songName != None and artist != None:
-        song = genius.search_song(songName, artist)
-    else:
-        print("Atleast song name needs to be passed. Use -s <song> -a <artist>")
+    if songName == None:
+        print("Song name needs to be passed. Use -s <song> -a <artist>")
         return
-    song_dict = genius.song(song.id)
-    print("song_img: " + song_dict['song']['header_image_url'] + ", album_img: "  + song_dict['song']['song_art_image_url'] + ", song_description: " + song_dict['song']['description']['plain'])
+    fetch_coverart(artist, songName)
 
 if __name__ == '__main__':
     main()

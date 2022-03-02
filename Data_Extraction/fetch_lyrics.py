@@ -3,10 +3,21 @@ import sys
 
 ACCESS_TOKEN = 'efdoQZPNfD67-vtu0L77LV6XYjVg4OepeLPxsun2Y8Ferpxvq-be7a8osNEpkvxZ'
 
-def main():
+def fetch_lyrics(songName = None, artist = None, fileName = None):
     genius = Genius(ACCESS_TOKEN)
     genius.remove_section_headers = True
     genius.excluded_terms = ["(Remix)", "(Live)"]
+    if songName == None and artist != None:
+        artist = genius.search_artist(artist)
+        artist.save_lyrics(fileName)
+    elif songName != None and artist == None:
+        song = genius.search_song(songName)
+        print(song.lyrics)
+    elif songName != None and artist != None:
+        song = genius.search_song(songName, artist)
+        print(song.lyrics)
+
+def main():
     args = sys.argv[1:]
     artist = None
     songName = None
@@ -24,17 +35,10 @@ def main():
             i += 1
             continue
         i += 2
-    if songName == None and artist != None:
-        artist = genius.search_artist(artist)
-        artist.save_lyrics(fileName)
-    elif songName != None and artist == None:
-        song = genius.search_song(songName)
-        print(song.lyrics)
-    elif songName != None and artist != None:
-        song = genius.search_song(songName, artist)
-        print(song.lyrics)
-    else:
+    if songName == None and artist == None:
         print("Atleast one of artist and song needs to be passed. Use -s <song> -a <artist> -f <filename>")
+        return
+    fetch_lyrics(songName, artist, fileName)
 
 if __name__ == '__main__':
     main()
