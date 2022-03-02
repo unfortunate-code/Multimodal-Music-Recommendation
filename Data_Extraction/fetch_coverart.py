@@ -3,10 +3,13 @@ import sys
 
 ACCESS_TOKEN = 'efdoQZPNfD67-vtu0L77LV6XYjVg4OepeLPxsun2Y8Ferpxvq-be7a8osNEpkvxZ'
 
-def fetch_coverart(artist = None, songName = None):
+def fetch_coverart(artist = None, songName):
     genius = Genius(ACCESS_TOKEN)
     genius.remove_section_headers = True
     genius.excluded_terms = ["(Remix)", "(Live)"]
+    if songName == None:
+        print("Song name cannot be None")
+        return
     if songName != None and artist == None:
         song = genius.search_song(songName)
     elif songName != None and artist != None:
