@@ -7,6 +7,7 @@ def fetch_lyrics(songName = None, artist = None, fileName = None):
     genius = Genius(ACCESS_TOKEN)
     genius.remove_section_headers = True
     genius.excluded_terms = ["(Remix)", "(Live)"]
+    genius.retries = 3
     if songName == None and artist == None:
         print("Pass at least one of song name and artist")
         return
