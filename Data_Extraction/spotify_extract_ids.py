@@ -69,6 +69,5 @@ if __name__ == '__main__':
     print('New total entries',len(df))
     
     df.to_csv(out_path,sep='\t',index=False)
-            
-            
+    
 
