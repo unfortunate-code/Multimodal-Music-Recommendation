@@ -21,7 +21,9 @@ if __name__ == '__main__':
     manual_start_idx = int(sys.argv[2]) if len(sys.argv) > 2 else None
     path = '../Data'
     print('loading unique_songs.txt...')
-    uniq = pd.read_csv(path+'/unique_songs.txt',sep='\t',header=None)
+
+    # uniq = pd.read_csv(path+'/unique_songs.txt',sep='\t',header=None)
+    uniq = pd.read_csv(path+'/songs.txt',sep='\t',header=None)
     queries = list(uniq[0] + ' artist:' + uniq[1])
     
     # with open('spotify.json','a+') as f:
