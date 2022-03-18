@@ -23,7 +23,7 @@ if __name__ == '__main__':
     print('loading unique_songs.txt...')
 
     # uniq = pd.read_csv(path+'/unique_songs.txt',sep='\t',header=None)
-    uniq = pd.read_csv(path+'/songs.txt',sep='\t',header=None)
+    uniq = pd.read_csv(path+'/audio/songs.txt',sep='\t',header=None)
     queries = list(uniq[0] + ' artist:' + uniq[1])
     
     # with open('spotify.json','a+') as f:
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     #     else:
     #         total = int(total)
     
-    out_path = path+'/ids.txt'
+    out_path = path+'/audio/ids.txt'
     print('loading',out_path,'...',end=' ')
     if not os.path.exists(out_path):
         with open(out_path,'w') as f:
