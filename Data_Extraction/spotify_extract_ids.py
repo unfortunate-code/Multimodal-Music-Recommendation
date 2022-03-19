@@ -2,6 +2,7 @@ import pandas as pd
 import spotipy
 import os
 import sys
+import csv
 # import json
 # import time
 from tqdm import tqdm
@@ -23,7 +24,7 @@ if __name__ == '__main__':
     print('loading unique_songs.txt...')
 
     # uniq = pd.read_csv(path+'/unique_songs.txt',sep='\t',header=None)
-    uniq = pd.read_csv(path+'/audio/songs.txt',sep='\t',header=None)
+    uniq = pd.read_csv(path+'/audio/songs.txt',sep='\t',header=None,quoting=csv.QUOTE_NONE,encoding='utf-8')
     queries = list(uniq[0] + ' artist:' + uniq[1])
     
     # with open('spotify.json','a+') as f:

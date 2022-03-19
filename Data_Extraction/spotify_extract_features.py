@@ -5,6 +5,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 def batch_audio_features(spotify, ids):
     features = spotify.audio_features(','.join(ids)) # 100 IDs at a time
+    features = list(filter(None, features))
     return features
 
 def get_audio_features(spotify, df):
