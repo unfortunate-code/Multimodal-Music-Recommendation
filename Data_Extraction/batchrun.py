@@ -1,18 +1,18 @@
 from numpy import number
 import pandas as pd
 
-TOTAL = 40432
-# TOTAL = 136099
+# TOTAL = 112550
+TOTAL = 136098
 SIZE = 10
 
 # generate bash for all
-# for i in range(0,TOTAL-SIZE,SIZE):
+# for i in range(0,TOTAL,SIZE):
 #     print("python spotify_extract_ids.py {} {}".format(SIZE,i))
 
 
 
 # find missing ids
-PATH = "../Data/audio/ids(Mar17th).txt"
+PATH = "../Data/audio/song_map.txt"
 df = pd.read_csv(PATH,sep='\t')
 # print(len(df),'entries found')
 
@@ -22,7 +22,7 @@ list.sort()
 
 for index, id in enumerate(list):
     if id < TOTAL and list[index+1] - id > 1:
-        begin = id+1
+        begin = id
         end = list[index+1]
         size = end - id - 1
         if size > SIZE:
