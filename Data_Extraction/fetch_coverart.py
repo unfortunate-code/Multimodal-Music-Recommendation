@@ -17,6 +17,8 @@ def fetch_coverart(artist, songName):
         song = genius.search_song(songName, artist)
     song_dict = genius.song(song.id)
     print(song_dict)
+    print("*********************")
+    print("*********************")
     print("song_img: " + song_dict['song']['header_image_url'] + ", album_img: "  + song_dict['song']['song_art_image_url'] + ", song_description: " + song_dict['song']['description']['plain'])
 
 

@@ -16,10 +16,10 @@ def fetch_lyrics(songName = None, artist = None, fileName = None):
         artist.save_lyrics(fileName)
     elif songName != None and artist == None:
         song = genius.search_song(songName)
-        print(song.lyrics)
+        return song.lyrics
     elif songName != None and artist != None:
         song = genius.search_song(songName, artist)
-        print(song.lyrics)
+        return song.lyrics
 
 def main():
     args = sys.argv[1:]
