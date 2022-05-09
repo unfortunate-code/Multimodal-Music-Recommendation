@@ -10,15 +10,17 @@ def fetch_lyrics(songName = None, artist = None, fileName = None):
     genius.retries = 3
     if songName == None and artist == None:
         print("Pass at least one of song name and artist")
-        return
+        return None
     if songName == None and artist != None:
         artist = genius.search_artist(artist)
         artist.save_lyrics(fileName)
     elif songName != None and artist == None:
         song = genius.search_song(songName)
+        if not song: return None
         return song.lyrics
     elif songName != None and artist != None:
         song = genius.search_song(songName, artist)
+        if not song: return None
         return song.lyrics
 
 def main():

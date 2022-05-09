@@ -10,7 +10,6 @@ def fetch_genres(genresFileName, outputFileName):
 
     genius = Genius(ACCESS_TOKEN)
     genius.remove_section_headers = True
-    genius.excluded_terms = ["(Remix)", "(Live)"]
     genius.retries = 3
 
     res = {}
