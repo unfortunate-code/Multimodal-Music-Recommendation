@@ -3,8 +3,6 @@ from PIL import Image
 import torch
 import torch.nn as nn
 
-dim = 512
-
 class Encoder(nn.Module):
     def __init__(self, nz=128):
         super().__init__()
@@ -106,6 +104,7 @@ BATCH_SIZE=128
 data_all = np.load("../npy/normalized-image.npy")
 print(data_all.shape)
 
+dim = 256
 ae_model = AutoEncoder(dim)
 ae_model = nn.DataParallel(ae_model)
 ae_model.load_state_dict(torch.load('model.p',map_location='cpu'))
@@ -120,5 +119,5 @@ for i, chunk in enumerate(data_load):
     embedding_np[i*BATCH_SIZE:i*BATCH_SIZE + len(np_sub)] = np_sub
     print(embedding_np.shape)
 
-with open('../npy/album_embedding-'+str(dim)+'.npy', 'wb') as f:
+with open('../npy/album_embedding.npy', 'wb') as f:
     np.save(f, embedding_np)
